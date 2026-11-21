@@ -1,0 +1,183 @@
+// Prisma Data Model for BooksCheck (PRD 8.7)
+// Pinned Prisma version: 6.4.1
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // pooled connection for the app
+  directUrl = env("DIRECT_URL")   // direct connection for migrations
+}
+
+enum BookingStatus {
+  ACTIVE
+  CANCELLED
+}
+
+enum BookingEventKind {
+  CREATED
+  UPDATED
+  CANCELLED
+  DELETED
+}
+
+enum EmailTokenKind {
+  VERIFY_EMAIL
+  CHANGE_EMAIL
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique // stored lowercase
+  emailVerifiedAt DateTime?
+  fullName        String
+  passwordHash    String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // MVP: one user per company. The unique constraint enforces it.
+  // Version 2: drop @unique and add a role field for multiple accounts.
+  companyId String?  @unique
+  company   Company? @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  sessions    Session[]
+  resetTokens PasswordResetToken[]
+  emailTokens EmailToken[]
+}
+
+model Session {
+  id          String   @id // SHA-256 hash of the cookie token
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt   DateTime // idle expiry, 7 days from last activity
+  lastSeenAt  DateTime @default(now())
+  deviceClass String?  // "laptop" or "phone", for pilot analysis
+  createdAt   DateTime @default(now()) // absolute limit is 30 days from here
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  tokenHash String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId])
+}
+
+model EmailToken {
+  id        String         @id @default(cuid())
+  kind      EmailTokenKind
+  email     String         // the address being verified
+  tokenHash String         @unique
+  userId    String
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime       @default(now())
+
+  @@index([userId])
+}
+
+// Counts attempts for login, sign-up, reset, and resend limits.
+// "bucket" holds a SHA-256 hash of the limit key. A daily job deletes rows older than 24 hours.
+model RateLimitHit {
+  id        String   @id @default(cuid())
+  bucket    String
+  createdAt DateTime @default(now())
+
+  @@index([bucket, createdAt])
+}
+
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  address   String?
+  city      String?
+  country   String   @db.Char(2) // ISO 3166-1 alpha-2
+  phone     String?
+  email     String?
+  currency  String   @db.Char(3) // ISO 4217, editable until the first booking
+  timeZone  String   // IANA name, for example "Africa/Lagos"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user       User?
+  apartments Apartment[]
+  bookings   Booking[]
+  events     BookingEvent[]
+}
+
+model Apartment {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  name      String
+  roomCount Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings Booking[]
+
+  // Needed so Booking can reference (id, companyId) together.
+  @@unique([id, companyId])
+  @@index([companyId])
+  // Case-insensitive unique name per company is added in raw SQL (8.8).
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+  companyId   String
+  company     Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  apartmentId String
+  // NoAction lets a company delete cascade cleanly. Test it in staging.
+  apartment   Apartment     @relation(fields: [apartmentId, companyId], references: [id, companyId], onDelete: NoAction)
+
+  guestName   String
+  guestPhone  String
+  notes       String?       @db.VarChar(500)
+
+  // Calendar dates with no time. In code, always move them as "YYYY-MM-DD" text (FR-90).
+  checkIn     DateTime      @db.Date
+  checkOut    DateTime      @db.Date
+
+  // Money as exact decimals. Never use floats for money.
+  // Balance is NOT stored. It is totalPrice minus amountPaid.
+  // In code, move money as decimal text (FR-89).
+  totalPrice  Decimal       @db.Decimal(12, 2)
+  amountPaid  Decimal       @default(0) @db.Decimal(12, 2)
+
+  status      BookingStatus @default(ACTIVE)
+  cancelledAt DateTime?
+
+  requestId    String?      // makes a retried save safe (FR-52)
+  entrySeconds Int?         // client-reported, used only for the G3 metric (FR-54)
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt // also the edit conflict token (FR-61)
+
+  @@unique([companyId, requestId])
+  @@index([companyId, checkIn])
+  @@index([apartmentId, checkIn])
+  @@index([companyId, status])
+}
+
+// History of booking changes. No foreign key on bookingId, so rows survive a delete.
+model BookingEvent {
+  id        String           @id @default(cuid())
+  companyId String
+  company   Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  bookingId String
+  kind      BookingEventKind
+  changes   Json             // never holds guest name, phone, or notes
+  createdAt DateTime         @default(now())
+
+  @@index([companyId, bookingId, createdAt])
+}

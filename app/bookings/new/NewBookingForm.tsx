@@ -10,6 +10,18 @@ interface ApartmentOption {
   name: string;
 }
 
+function generateUUID(): string {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  // Safe fallback for insecure contexts (e.g. testing on phone via local HTTP IP address)
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
 interface NewBookingFormProps {
   apartments: ApartmentOption[];
   currency: string;
@@ -24,7 +36,7 @@ export function NewBookingForm({
   initialCheckIn,
 }: NewBookingFormProps) {
   // Generate unique requestId on form open (FR-52)
-  const [requestId] = useState<string>(() => crypto.randomUUID());
+  const [requestId] = useState<string>(() => generateUUID());
   const [loadTime] = useState<number>(() => Date.now());
 
   // Form field states

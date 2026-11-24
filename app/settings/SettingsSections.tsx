@@ -48,7 +48,7 @@ const labelClass = "block text-sm font-medium text-slate-700";
 const btnPrimary =
   "px-5 py-2.5 bg-[#0F766E] hover:bg-[#115E59] active:bg-teal-900 text-white text-sm font-semibold rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-500/20 disabled:opacity-50 transition";
 const btnDanger =
-  "px-3.5 py-2 border border-red-200 bg-red-50 text-red-700 text-sm font-medium rounded-xl hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500/20 disabled:opacity-50 transition";
+  "px-3.5 py-2.5 border border-red-200 bg-red-50 text-red-700 text-sm font-medium rounded-xl hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500/20 disabled:opacity-50 transition";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TIMEZONES & COUNTRIES (abbreviated list for MVP)
@@ -208,6 +208,7 @@ export function CompanyForm({ company, hasBookings }: CompanyFormProps) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Apartment Row (rename + room count) (FR-81)
+// Linear Grid: Apartment Name (1fr) | Rooms (96px) | Save (auto) | Action (96px)
 // ─────────────────────────────────────────────────────────────────────────────
 
 interface ApartmentRowProps {
@@ -234,15 +235,15 @@ export function ApartmentRow({ id, name, roomCount, bookingCount }: ApartmentRow
   }
 
   return (
-    <div className="border border-slate-200/90 rounded-xl p-4 space-y-3 bg-slate-50/50">
+    <div className="border border-slate-200/90 rounded-xl p-4 bg-slate-50/50 space-y-3">
       {state?.success && <SuccessBanner message="Apartment updated." />}
       {state?.error && !state.success && <ErrorBanner message={state.error} />}
       {deleteState?.error && <ErrorBanner message={deleteState.error} />}
 
-      <form action={formAction} className="flex flex-wrap items-end gap-3">
+      <form action={formAction} className="grid grid-cols-1 sm:grid-cols-[1fr_96px_auto_96px] items-end gap-3">
         <input type="hidden" name="apartmentId" value={id} />
 
-        <div className="flex-1 min-w-[180px]">
+        <div>
           <label htmlFor={`apt-name-${id}`} className={labelClass}>Apartment name *</label>
           <input
             id={`apt-name-${id}`}
@@ -256,7 +257,7 @@ export function ApartmentRow({ id, name, roomCount, bookingCount }: ApartmentRow
           <FieldError msg={state?.fieldErrors?.name} />
         </div>
 
-        <div className="w-28">
+        <div>
           <label htmlFor={`apt-rooms-${id}`} className={labelClass}>Rooms *</label>
           <input
             id={`apt-rooms-${id}`}
@@ -271,23 +272,25 @@ export function ApartmentRow({ id, name, roomCount, bookingCount }: ApartmentRow
           <FieldError msg={state?.fieldErrors?.roomCount} />
         </div>
 
-        <div className="flex items-center gap-2 pb-0.5">
-          <button type="submit" disabled={isPending} className={btnPrimary}>
+        <div>
+          <button type="submit" disabled={isPending} className={`${btnPrimary} w-full sm:w-auto px-4 text-center whitespace-nowrap`}>
             {isPending ? "Saving…" : "Save"}
           </button>
+        </div>
 
+        <div className="flex items-center justify-start h-[42px]">
           {/* FR-83: Delete only when no bookings of any status */}
           {bookingCount === 0 ? (
             <button
               type="button"
               onClick={handleDelete}
               disabled={deletePending}
-              className={btnDanger}
+              className={`${btnDanger} w-full text-center whitespace-nowrap`}
             >
               {deletePending ? "Removing…" : "Remove"}
             </button>
           ) : (
-            <span className="text-xs text-slate-500 ml-1">
+            <span className="text-xs text-slate-500 font-medium px-1 whitespace-nowrap">
               {bookingCount} booking{bookingCount !== 1 ? "s" : ""}
             </span>
           )}
@@ -308,53 +311,55 @@ export function AddApartmentForm({ apartmentCount }: { apartmentCount: number })
   );
 
   return (
-    <form action={formAction} className="flex flex-wrap items-end gap-3 pt-4 border-t border-slate-200">
-      {state?.success && <div className="w-full"><SuccessBanner message="Apartment added." /></div>}
-      {state?.error && !state.success && <div className="w-full"><ErrorBanner message={state.error} /></div>}
+    <form action={formAction} className="pt-4 border-t border-slate-200 space-y-3">
+      {state?.success && <SuccessBanner message="Apartment added." />}
+      {state?.error && !state.success && <ErrorBanner message={state.error} />}
 
-      <div className="flex-1 min-w-[180px]">
-        <label htmlFor="new-apt-name" className={labelClass}>New apartment name *</label>
-        <input
-          id="new-apt-name"
-          name="name"
-          type="text"
-          required
-          maxLength={60}
-          className={inputClass}
-          placeholder="e.g. Room 101"
-        />
-        <FieldError msg={state?.fieldErrors?.name} />
-      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_96px_auto_96px] items-end gap-3">
+        <div>
+          <label htmlFor="new-apt-name" className={labelClass}>New apartment name *</label>
+          <input
+            id="new-apt-name"
+            name="name"
+            type="text"
+            required
+            maxLength={60}
+            className={inputClass}
+            placeholder="e.g. Room 101"
+          />
+          <FieldError msg={state?.fieldErrors?.name} />
+        </div>
 
-      <div className="w-28">
-        <label htmlFor="new-apt-rooms" className={labelClass}>Rooms *</label>
-        <input
-          id="new-apt-rooms"
-          name="roomCount"
-          type="number"
-          required
-          min={1}
-          max={20}
-          defaultValue={1}
-          className={inputClass}
-        />
-        <FieldError msg={state?.fieldErrors?.roomCount} />
-      </div>
+        <div>
+          <label htmlFor="new-apt-rooms" className={labelClass}>Rooms *</label>
+          <input
+            id="new-apt-rooms"
+            name="roomCount"
+            type="number"
+            required
+            min={1}
+            max={20}
+            defaultValue={1}
+            className={inputClass}
+          />
+          <FieldError msg={state?.fieldErrors?.roomCount} />
+        </div>
 
-      <div className="pb-0.5">
-        <button
-          type="submit"
-          disabled={isPending || apartmentCount >= 50}
-          className={btnPrimary}
-        >
-          {isPending ? "Adding…" : "+ Add apartment"}
-        </button>
+        <div className="sm:col-span-2">
+          <button
+            type="submit"
+            disabled={isPending || apartmentCount >= 50}
+            className={`${btnPrimary} w-full sm:w-auto px-4 whitespace-nowrap`}
+          >
+            {isPending ? "Adding…" : "+ Add apartment"}
+          </button>
+        </div>
       </div>
 
       {apartmentCount >= 50 && (
-        <p className="w-full text-xs text-amber-700">Maximum of 50 apartments reached.</p>
+        <p className="text-xs text-amber-700">Maximum of 50 apartments reached.</p>
       )}
-      <p className="w-full text-xs text-slate-500">
+      <p className="text-xs text-slate-500">
         A hotel registers each rentable room as an apartment.
       </p>
     </form>

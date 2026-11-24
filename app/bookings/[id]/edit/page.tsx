@@ -59,25 +59,28 @@ export default async function EditBookingPage({ params }: EditBookingPageProps) 
   const loadedUpdatedAt = booking.updatedAt.toISOString();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-[#F6F7F9] flex flex-col">
       {/* Top Header */}
       <AppHeader
         companyName={booking.company.name}
+        userName={auth.user.fullName}
+        currency={currency}
+        timeZone={booking.company.timeZone}
         currentTab="bookings"
       />
 
-      <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8">
+      <main className="flex-1 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">Edit Booking</h1>
-            <p className="text-sm text-gray-600">
+            <h1 className="font-display text-2xl font-bold text-[#182230]">Edit Booking</h1>
+            <p className="text-sm text-slate-500">
               Editing booking for{" "}
-              <span className="font-medium text-gray-900">{booking.guestName}</span> in{" "}
-              <span className="font-medium text-gray-900">{booking.apartment.name}</span>.
+              <span className="font-semibold text-slate-800">{booking.guestName}</span> in{" "}
+              <span className="font-semibold text-slate-800">{booking.apartment.name}</span>.
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200/90">
             <EditBookingForm
               bookingId={id}
               loadedUpdatedAt={loadedUpdatedAt}

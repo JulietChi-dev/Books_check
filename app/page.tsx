@@ -85,7 +85,7 @@ export default async function Home({ searchParams }: HomeProps) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-[#F6F7F9]">
       {/* Unverified email banner (FR-8) */}
       {!auth.user.emailVerifiedAt && (
         <UnverifiedEmailBanner email={auth.user.email} />

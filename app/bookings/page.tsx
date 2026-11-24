@@ -96,7 +96,7 @@ export default async function BookingsPage({ searchParams }: BookingsPageProps) 
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-[#F6F7F9]">
       {/* Header */}
       <AppHeader
         companyName={companyName}
@@ -109,10 +109,10 @@ export default async function BookingsPage({ searchParams }: BookingsPageProps) 
       <main className="flex-1 max-w-screen-xl w-full mx-auto px-4 sm:px-6 py-6 flex flex-col gap-5">
         {/* Page title + New booking button (FR-79) */}
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Bookings</h1>
+          <h1 className="font-display text-2xl font-bold text-[#182230]">Bookings</h1>
           <Link
             href="/bookings/new"
-            className="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-md shadow-sm hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-4 py-2 bg-[#0F766E] hover:bg-[#115E59] active:bg-teal-900 text-white text-sm font-semibold rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
           >
             + New booking
           </Link>
@@ -130,25 +130,25 @@ export default async function BookingsPage({ searchParams }: BookingsPageProps) 
         />
 
         {/* Summary bar (FR-76) */}
-        <div className="bg-white border border-gray-200 rounded-lg px-5 py-4 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div className="bg-white border border-slate-200/90 rounded-2xl px-5 py-4 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
           <div>
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-0.5">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-0.5">
               Active bookings
             </p>
-            <p className="font-semibold text-gray-900">
+            <p className="font-semibold text-slate-900">
               {summary.activeCount} booking{summary.activeCount !== 1 ? "s" : ""}
             </p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-0.5">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-0.5">
               Total price
             </p>
-            <p className="font-semibold text-gray-900">
+            <p className="font-semibold text-slate-900">
               {formatMoneyDisplay(currency, summary.activeTotalPrice)}
             </p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-0.5">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-0.5">
               Total paid
             </p>
             <p className="font-semibold text-emerald-700">
@@ -156,72 +156,72 @@ export default async function BookingsPage({ searchParams }: BookingsPageProps) 
             </p>
           </div>
           <div>
-            <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-0.5">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-0.5">
               Balance owed
             </p>
             <p className="font-semibold text-amber-700">
               {formatMoneyDisplay(currency, summary.activeTotalBalance)}
             </p>
           </div>
-          <div className="col-span-2 md:col-span-4 border-t border-gray-100 pt-3">
-            <p className="text-xs text-gray-500">
-              <span className="font-medium text-gray-700">Held on cancelled bookings:</span>{" "}
+          <div className="col-span-2 md:col-span-4 border-t border-slate-100 pt-3">
+            <p className="text-xs text-slate-500">
+              <span className="font-medium text-slate-700">Held on cancelled bookings:</span>{" "}
               {formatMoneyDisplay(currency, summary.heldOnCancelled)}
             </p>
           </div>
         </div>
 
         {/* Table */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-white border border-slate-200/90 rounded-2xl shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             {bookings.length === 0 ? (
               /* FR-78: Empty state */
-              <div className="text-center py-16 text-gray-500">
+              <div className="text-center py-16 text-slate-500">
                 <p className="text-sm font-medium">No bookings match your filters.</p>
                 <Link
                   href="/bookings/new"
-                  className="mt-3 inline-block text-sm text-blue-600 hover:underline"
+                  className="mt-3 inline-block text-sm font-semibold text-[#0F766E] hover:underline"
                 >
                   Create a new booking
                 </Link>
               </div>
             ) : (
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-slate-200">
+                <thead className="bg-slate-50">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
                       Apartment
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
                       Guest
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider hidden lg:table-cell">
                       Phone
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
                       Check-in
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider hidden md:table-cell">
                       Check-out
                     </th>
-                    <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider hidden md:table-cell">
                       Nights
                     </th>
-                    <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider hidden lg:table-cell">
                       Total
                     </th>
-                    <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider hidden lg:table-cell">
                       Paid
                     </th>
-                    <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-4 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">
                       Balance
                     </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
                       Status
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-slate-100">
                   {/* FR-77: Clicking a row opens the details view */}
                   {bookings.map((booking) => {
                     const isCancelled = booking.status === "CANCELLED";
@@ -230,50 +230,50 @@ export default async function BookingsPage({ searchParams }: BookingsPageProps) 
                       <BookingRow
                         key={booking.id}
                         id={booking.id}
-                        className="hover:bg-blue-50 cursor-pointer transition-colors"
+                        className="hover:bg-slate-50 cursor-pointer transition-colors"
                       >
-                        <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                        <td className="px-4 py-3 text-sm font-semibold text-slate-900">
                           {booking.apartmentName}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-900">
+                        <td className="px-4 py-3 text-sm text-slate-900">
                           {booking.guestName}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-600 hidden lg:table-cell">
+                        <td className="px-4 py-3 text-sm text-slate-600 hidden lg:table-cell">
                           {booking.guestPhone}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-700 whitespace-nowrap">
+                        <td className="px-4 py-3 text-sm text-slate-700 whitespace-nowrap">
                           {formatDisplayDate(booking.checkIn)}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-700 whitespace-nowrap hidden md:table-cell">
+                        <td className="px-4 py-3 text-sm text-slate-700 whitespace-nowrap hidden md:table-cell">
                           {formatDisplayDate(booking.checkOut)}
                         </td>
-                        <td className="px-4 py-3 text-sm text-gray-700 text-right hidden md:table-cell">
+                        <td className="px-4 py-3 text-sm text-slate-700 text-right hidden md:table-cell">
                           {booking.nights}
                         </td>
-                        <td className="px-4 py-3 text-sm text-right text-gray-900 hidden lg:table-cell">
+                        <td className="px-4 py-3 text-sm text-right text-slate-900 hidden lg:table-cell font-mono">
                           {formatMoneyDisplay(currency, booking.totalPrice)}
                         </td>
-                        <td className="px-4 py-3 text-sm text-right text-emerald-700 hidden lg:table-cell">
+                        <td className="px-4 py-3 text-sm text-right text-emerald-700 hidden lg:table-cell font-mono font-medium">
                           {formatMoneyDisplay(currency, booking.amountPaid)}
                         </td>
-                        <td className="px-4 py-3 text-sm text-right font-medium">
+                        <td className="px-4 py-3 text-sm text-right font-medium font-mono">
                           {isCancelled ? (
-                            <span className="text-gray-400">n/a</span>
+                            <span className="text-slate-400">n/a</span>
                           ) : hasBalance ? (
-                            <span className="text-amber-700">
+                            <span className="text-amber-700 font-semibold">
                               {formatMoneyDisplay(currency, booking.balance)}
                             </span>
                           ) : (
-                            <span className="text-emerald-600">✓ Paid</span>
+                            <span className="text-emerald-700 font-semibold">✓ Paid</span>
                           )}
                         </td>
                         <td className="px-4 py-3 text-sm">
                           {isCancelled ? (
-                            <span className="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+                            <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                               Cancelled
                             </span>
                           ) : (
-                            <span className="inline-flex px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                            <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
                               Active
                             </span>
                           )}
@@ -289,7 +289,7 @@ export default async function BookingsPage({ searchParams }: BookingsPageProps) 
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between text-sm text-gray-600">
+          <div className="flex items-center justify-between text-sm text-slate-600">
             <p>
               Showing {(currentPage - 1) * 25 + 1}–
               {Math.min(currentPage * 25, totalCount)} of {totalCount} bookings
@@ -298,18 +298,18 @@ export default async function BookingsPage({ searchParams }: BookingsPageProps) 
               {currentPage > 1 && (
                 <Link
                   href={pageUrl(currentPage - 1)}
-                  className="px-3 py-1.5 border border-gray-300 rounded-md hover:bg-gray-50 transition"
+                  className="px-3.5 py-1.5 border border-slate-300 rounded-xl hover:bg-slate-50 transition font-medium"
                 >
                   ← Previous
                 </Link>
               )}
-              <span className="px-3 py-1.5 text-gray-900 font-medium">
+              <span className="px-3.5 py-1.5 text-slate-900 font-semibold">
                 Page {currentPage} of {totalPages}
               </span>
               {currentPage < totalPages && (
                 <Link
                   href={pageUrl(currentPage + 1)}
-                  className="px-3 py-1.5 border border-gray-300 rounded-md hover:bg-gray-50 transition"
+                  className="px-3.5 py-1.5 border border-slate-300 rounded-xl hover:bg-slate-50 transition font-medium"
                 >
                   Next →
                 </Link>

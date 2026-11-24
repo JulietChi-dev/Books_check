@@ -1,19 +1,19 @@
 /**
  * Calendar Legend (PRD FR-31, screens.md rule 4)
- * Shows green = Paid, amber = Owes, sits above the grid.
+ * Shows emerald = Paid, amber = Owes, sits above the grid.
  * Meaning is never colour-alone — text label accompanies each swatch.
  */
 export function Legend() {
   return (
-    <div className="flex items-center gap-6 text-sm mb-3">
-      <span className="font-medium text-gray-700">Legend:</span>
-      <span className="flex items-center gap-1.5">
-        <span className="inline-block w-4 h-4 rounded-sm bg-green-500 border border-green-600 flex-shrink-0" />
-        <span className="text-gray-700">Paid ✓</span>
+    <div className="flex items-center gap-3 text-xs mb-3">
+      <span className="font-medium text-slate-500">Legend:</span>
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 font-semibold">
+        <span className="w-2 h-2 rounded-full bg-[#16A34A] flex-shrink-0" />
+        <span>Paid ✓</span>
       </span>
-      <span className="flex items-center gap-1.5">
-        <span className="inline-block w-4 h-4 rounded-sm bg-amber-400 border border-amber-500 flex-shrink-0" />
-        <span className="text-gray-700">Owes balance</span>
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900 font-semibold">
+        <span className="w-2 h-2 rounded-full bg-[#D97706] flex-shrink-0" />
+        <span>Owes balance</span>
       </span>
     </div>
   );

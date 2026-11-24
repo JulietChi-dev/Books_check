@@ -57,7 +57,7 @@ export function BookingDetailsActions({
   return (
     <div className="flex flex-col gap-3">
       {error && (
-        <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-md">
+        <div className="p-3.5 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl font-medium">
           {error}
         </div>
       )}
@@ -65,7 +65,7 @@ export function BookingDetailsActions({
       <div className="flex flex-wrap items-center gap-3">
         <Link
           href="/"
-          className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition"
+          className="px-4 py-2 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-600/20 shadow-xs transition-colors"
         >
           ← Back to Calendar
         </Link>
@@ -73,7 +73,7 @@ export function BookingDetailsActions({
         {!isCancelled && (
           <Link
             href={`/bookings/${bookingId}/edit`}
-            className="px-4 py-2 bg-blue-600 border border-transparent rounded-md text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition"
+            className="px-4 py-2 bg-[#0F766E] hover:bg-[#115E59] active:bg-teal-900 border border-transparent rounded-xl text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-[#0F766E] shadow-sm shadow-teal-900/15 transition-all"
           >
             Edit booking
           </Link>
@@ -84,7 +84,7 @@ export function BookingDetailsActions({
             type="button"
             onClick={() => setShowCancelModal(true)}
             disabled={isPending}
-            className="px-4 py-2 border border-amber-300 bg-amber-50 text-amber-800 rounded-md text-sm font-medium hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-sm transition disabled:opacity-50"
+            className="px-4 py-2 border border-amber-300 bg-amber-50 text-amber-900 rounded-xl text-sm font-semibold hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
           >
             Cancel booking
           </button>
@@ -95,7 +95,7 @@ export function BookingDetailsActions({
             type="button"
             onClick={() => setShowDeleteModal(true)}
             disabled={isPending}
-            className="px-4 py-2 border border-red-300 bg-red-50 text-red-700 rounded-md text-sm font-medium hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-sm transition disabled:opacity-50"
+            className="px-4 py-2 border border-red-300 bg-red-50 text-red-700 rounded-xl text-sm font-semibold hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-xs transition-colors disabled:opacity-50 cursor-pointer"
           >
             Delete booking
           </button>
@@ -104,12 +104,12 @@ export function BookingDetailsActions({
             <button
               type="button"
               disabled
-              className="px-4 py-2 border border-gray-200 bg-gray-100 text-gray-400 rounded-md text-sm font-medium cursor-not-allowed"
+              className="px-4 py-2 border border-slate-200 bg-slate-100 text-slate-400 rounded-xl text-sm font-semibold cursor-not-allowed"
               title="Cancel instead. Bookings with payments cannot be deleted."
             >
               Delete booking
             </button>
-            <span className="hidden group-hover:block absolute bottom-full left-0 mb-1 w-64 p-2 bg-gray-900 text-white text-xs rounded shadow-lg z-20">
+            <span className="hidden group-hover:block absolute bottom-full left-0 mb-1 w-64 p-2 bg-[#182230] text-white text-xs rounded-lg shadow-lg z-20 border border-slate-700">
               Cancel instead. Bookings with payments cannot be deleted.
             </span>
           </div>
@@ -119,17 +119,17 @@ export function BookingDetailsActions({
       {/* Cancel Confirmation Modal (FR-65) */}
       {showCancelModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl border border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Cancel booking</h3>
-            <p className="text-sm text-gray-600 mb-6">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200/90 space-y-4">
+            <h3 className="font-display text-lg font-bold text-[#182230]">Cancel booking</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
               Cancel this booking? It will leave the calendar but stay in your list as Cancelled.
             </p>
-            <div className="flex justify-end gap-3">
+            <div className="flex justify-end gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => setShowCancelModal(false)}
                 disabled={isPending}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                className="px-4 py-2 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 Keep booking
               </button>
@@ -137,7 +137,7 @@ export function BookingDetailsActions({
                 type="button"
                 onClick={handleCancelConfirm}
                 disabled={isPending}
-                className="px-4 py-2 bg-amber-600 text-white rounded-md text-sm font-medium hover:bg-amber-700 transition disabled:opacity-50"
+                className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-sm font-semibold transition-colors disabled:opacity-50 shadow-xs cursor-pointer"
               >
                 {isPending ? "Cancelling..." : "Yes, cancel booking"}
               </button>
@@ -149,17 +149,17 @@ export function BookingDetailsActions({
       {/* Delete Confirmation Modal (FR-67) */}
       {showDeleteModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl border border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Delete permanently</h3>
-            <p className="text-sm text-gray-600 mb-6">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200/90 space-y-4">
+            <h3 className="font-display text-lg font-bold text-[#182230]">Delete permanently</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
               Delete permanently? This cannot be undone.
             </p>
-            <div className="flex justify-end gap-3">
+            <div className="flex justify-end gap-3 pt-2">
               <button
                 type="button"
                 onClick={() => setShowDeleteModal(false)}
                 disabled={isPending}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+                className="px-4 py-2 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 Cancel
               </button>
@@ -167,7 +167,7 @@ export function BookingDetailsActions({
                 type="button"
                 onClick={handleDeleteConfirm}
                 disabled={isPending}
-                className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700 transition disabled:opacity-50"
+                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-semibold transition-colors disabled:opacity-50 shadow-xs cursor-pointer"
               >
                 {isPending ? "Deleting..." : "Yes, delete"}
               </button>

@@ -59,10 +59,6 @@ export function BookingsFilters({
     // Reset to page 1 on any filter change
     params.delete("page");
 
-    // If unpaid is set, year filter doesn't auto-clear (FR-70: "sets Year to All years
-    // unless the manager changes it" — here the manager is explicitly changing it, so keep it)
-    // If payment = unpaid, force status to ACTIVE display (server handles this)
-
     startTransition(() => {
       router.push(`/bookings?${params.toString()}`);
     });
@@ -79,16 +75,16 @@ export function BookingsFilters({
   }
 
   return (
-    <div className={`bg-white border border-gray-200 rounded-lg p-4 shadow-sm flex flex-col gap-4 ${isPending ? "opacity-70" : ""}`}>
+    <div className={`bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col gap-4 ${isPending ? "opacity-70" : ""}`}>
       {/* Row 1: Year, Month, Status, Payment, Sort */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         {/* Year */}
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-gray-600">Year</label>
+          <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Year</label>
           <select
             value={year}
             onChange={(e) => update("year", e.target.value)}
-            className="w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm bg-white focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E]"
           >
             <option value="">All years</option>
             {years.map((y) => (
@@ -101,11 +97,11 @@ export function BookingsFilters({
 
         {/* Month */}
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-gray-600">Month</label>
+          <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Month</label>
           <select
             value={month}
             onChange={(e) => update("month", e.target.value)}
-            className="w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm bg-white focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E]"
           >
             {MONTHS.map((m) => (
               <option key={m.value} value={m.value}>
@@ -117,12 +113,12 @@ export function BookingsFilters({
 
         {/* Status */}
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-gray-600">Status</label>
+          <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Status</label>
           <select
             value={status}
             onChange={(e) => update("status", e.target.value)}
             disabled={payment === "unpaid"}
-            className="w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm bg-white focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-400"
+            className="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] disabled:bg-slate-100 disabled:text-slate-400"
           >
             <option value="ACTIVE">Active</option>
             <option value="CANCELLED">Cancelled</option>
@@ -132,11 +128,11 @@ export function BookingsFilters({
 
         {/* Payment */}
         <div className="flex flex-col gap-1">
-          <label className="text-xs font-medium text-gray-600">Payment</label>
+          <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Payment</label>
           <select
             value={payment}
             onChange={(e) => update("payment", e.target.value)}
-            className="w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm bg-white focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E]"
           >
             <option value="">All</option>
             <option value="unpaid">Unpaid only</option>
@@ -145,11 +141,11 @@ export function BookingsFilters({
 
         {/* Sort */}
         <div className="flex flex-col gap-1 col-span-2 sm:col-span-1">
-          <label className="text-xs font-medium text-gray-600">Sort by</label>
+          <label className="text-xs font-semibold text-slate-700 uppercase tracking-wide">Sort by</label>
           <select
             value={sort}
             onChange={(e) => update("sort", e.target.value)}
-            className="w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm bg-white focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E]"
           >
             <option value="checkIn">Check-in (newest first)</option>
             <option value="balance">Balance (highest first)</option>
@@ -165,10 +161,10 @@ export function BookingsFilters({
             type="search"
             defaultValue={q}
             placeholder="Search guest name or phone…"
-            className="w-full pl-9 pr-3 py-1.5 border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500"
+            className="w-full pl-9 pr-3.5 py-2 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E]"
           />
           <svg
-            className="absolute left-2.5 top-2 h-4 w-4 text-gray-400"
+            className="absolute left-3 top-2.5 h-4 w-4 text-slate-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -183,7 +179,7 @@ export function BookingsFilters({
         </div>
         <button
           type="submit"
-          className="px-4 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="px-5 py-2 bg-[#0F766E] hover:bg-[#115E59] text-white text-sm font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
         >
           Search
         </button>
@@ -191,7 +187,7 @@ export function BookingsFilters({
           <button
             type="button"
             onClick={handleSearchClear}
-            className="px-3 py-1.5 border border-gray-300 text-sm text-gray-600 rounded-md hover:bg-gray-50 transition"
+            className="px-3.5 py-2 border border-slate-300 text-sm font-medium text-slate-600 rounded-xl hover:bg-slate-50 transition-colors cursor-pointer"
           >
             Clear
           </button>

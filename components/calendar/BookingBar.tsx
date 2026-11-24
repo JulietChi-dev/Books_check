@@ -57,17 +57,17 @@ export function BookingBar({
         width: `${widthPct}%`,
       }}
       className={[
-        "absolute top-1 bottom-1 rounded z-10",
-        "flex items-center px-1 gap-1 text-xs font-medium",
-        "overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-1",
+        "absolute top-1 bottom-1 rounded-lg z-10",
+        "flex items-center px-2 gap-1 text-[11.5px] font-semibold",
+        "overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-1 transition-all",
         isPaid
-          ? "bg-green-500 text-white focus:ring-green-600"
-          : "bg-amber-400 text-amber-900 focus:ring-amber-500",
+          ? "bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 border-l-4 border-l-[#16A34A] text-emerald-950 focus:ring-emerald-500 shadow-xs"
+          : "bg-amber-50 hover:bg-amber-100 border border-amber-300 border-l-4 border-l-[#D97706] text-amber-950 focus:ring-amber-500 shadow-xs",
       ].join(" ")}
     >
       {/* Status text — meaning never depends on colour alone (FR-31) */}
       {isPaid && (
-        <span className="flex-shrink-0 font-semibold">Paid ✓</span>
+        <span className="flex-shrink-0 font-bold text-[#16A34A]">Paid ✓</span>
       )}
       {/* Guest name — may be clipped */}
       <span className="truncate min-w-0 flex-1">{guestName}</span>

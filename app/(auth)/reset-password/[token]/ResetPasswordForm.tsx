@@ -19,14 +19,17 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
       {state?.error && (
         <div
           role="alert"
-          className="p-3 bg-red-50 border border-red-200 rounded text-sm text-red-700"
+          className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 font-medium"
         >
           {state.error}
         </div>
       )}
 
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="password"
+          className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1"
+        >
           New password
         </label>
         <input
@@ -36,13 +39,16 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           required
           minLength={8}
           maxLength={128}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
           placeholder="8 to 128 characters"
         />
       </div>
 
       <div>
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor="confirmPassword"
+          className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1"
+        >
           Confirm new password
         </label>
         <input
@@ -52,18 +58,20 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
           required
           minLength={8}
           maxLength={128}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
           placeholder="Re-enter new password"
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={isPending}
-        className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-      >
-        {isPending ? "Saving..." : "Save new password"}
-      </button>
+      <div className="pt-2">
+        <button
+          type="submit"
+          disabled={isPending}
+          className="w-full flex justify-center py-3 px-4 rounded-xl shadow-sm shadow-teal-900/15 text-sm font-semibold text-white bg-[#0F766E] hover:bg-[#115E59] active:bg-teal-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0F766E] disabled:opacity-50 transition-all cursor-pointer"
+        >
+          {isPending ? "Saving..." : "Save new password"}
+        </button>
+      </div>
     </form>
   );
 }

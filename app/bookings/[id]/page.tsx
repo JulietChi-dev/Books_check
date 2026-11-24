@@ -144,7 +144,7 @@ export default async function BookingDetailPage({ params }: BookingPageProps) {
   const canDelete = paidCents === 0n;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-[#F6F7F9]">
       {/* Top Header */}
       <AppHeader
         companyName={booking.company.name}
@@ -155,30 +155,30 @@ export default async function BookingDetailPage({ params }: BookingPageProps) {
       />
 
       {/* Main Content */}
-      <main className="max-w-4xl w-full mx-auto p-6 flex flex-col gap-6">
+      <main className="max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col gap-6">
         {/* Title and Status Banner */}
-        <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="font-display text-2xl font-bold text-[#182230]">
                 Booking: {booking.guestName}
               </h1>
               {isCancelled ? (
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                   Cancelled
                 </span>
               ) : balanceStr === "0.00" ? (
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
                   ✓ Active (Paid)
                 </span>
               ) : (
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 border border-amber-200">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-900 border border-amber-200">
                   Active (Owes {formatMoneyDisplay(currency, balanceStr)})
                 </span>
               )}
             </div>
-            <p className="text-sm text-gray-500">
-              Apartment: <span className="font-medium text-gray-800">{booking.apartment.name}</span>
+            <p className="text-sm text-slate-500">
+              Apartment: <span className="font-semibold text-slate-800">{booking.apartment.name}</span>
             </p>
           </div>
 
@@ -190,146 +190,119 @@ export default async function BookingDetailPage({ params }: BookingPageProps) {
         </div>
 
         {/* Details Grid (FR-62) */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-            <h2 className="text-base font-semibold text-gray-900">Booking Details</h2>
+        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+            <h2 className="font-display text-base font-bold text-[#182230]">Booking Details</h2>
           </div>
           <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 Guest Name
               </p>
-              <p className="text-sm font-semibold text-gray-900">{booking.guestName}</p>
+              <p className="text-sm font-semibold text-slate-900">{booking.guestName}</p>
             </div>
 
             <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 Guest Phone
               </p>
-              <p className="text-sm font-semibold text-gray-900">{booking.guestPhone}</p>
+              <p className="text-sm font-semibold text-slate-900">{booking.guestPhone}</p>
             </div>
 
             <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 Check-in Date
               </p>
-              <p className="text-sm font-semibold text-gray-900">
+              <p className="text-sm font-semibold text-slate-900">
                 {formatDisplayDate(checkInStr)}
               </p>
             </div>
 
             <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 Check-out Date
               </p>
-              <p className="text-sm font-semibold text-gray-900">
+              <p className="text-sm font-semibold text-slate-900">
                 {formatDisplayDate(checkOutStr)}
               </p>
             </div>
 
             <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 Nights
               </p>
-              <p className="text-sm font-semibold text-gray-900">
+              <p className="text-sm font-semibold text-slate-900">
                 {nights} {nights === 1 ? "night" : "nights"}
               </p>
             </div>
 
             <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
                 Apartment
               </p>
-              <p className="text-sm font-semibold text-gray-900">
+              <p className="text-sm font-semibold text-slate-900">
                 {booking.apartment.name} ({booking.apartment.roomCount}{" "}
                 {booking.apartment.roomCount === 1 ? "room" : "rooms"})
               </p>
             </div>
 
-            <div className="border-t border-gray-100 pt-4">
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                Total Price
+            <div className="border-t border-slate-100 pt-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Total stay rate
               </p>
-              <p className="text-base font-bold text-gray-900">
-                {formatMoneyDisplay(currency, totalPriceStr)}
-              </p>
-            </div>
-
-            <div className="border-t border-gray-100 pt-4">
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                Amount Paid
-              </p>
-              <p className="text-base font-bold text-emerald-700">
-                {formatMoneyDisplay(currency, amountPaidStr)}
+              <p className="text-base font-bold text-slate-900 font-mono">
+                {formatMoneyDisplay(currency, String(booking.totalPrice))}
               </p>
             </div>
 
-            <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                Balance
+            <div className="border-t border-slate-100 pt-4">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Amount paid
               </p>
-              <p
-                className={`text-base font-bold ${
-                  isCancelled
-                    ? "text-gray-400"
-                    : balanceStr === "0.00"
-                    ? "text-emerald-700"
-                    : "text-amber-800"
-                }`}
-              >
-                {isCancelled ? "n/a" : formatMoneyDisplay(currency, balanceStr)}
+              <p className="text-base font-bold text-emerald-700 font-mono">
+                {formatMoneyDisplay(currency, String(booking.amountPaid))}
               </p>
             </div>
 
-            <div>
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                Status
+            <div className="border-t border-slate-100 pt-4 col-span-1 md:col-span-2">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Balance owed
               </p>
-              <p className="text-sm font-semibold text-gray-900">
-                {booking.status}
-              </p>
+              {isCancelled ? (
+                <p className="text-base font-semibold text-slate-400">n/a (Cancelled)</p>
+              ) : balanceStr === "0.00" ? (
+                <p className="text-base font-bold text-emerald-700 font-mono">
+                  {formatMoneyDisplay(currency, balanceStr)} (Paid ✓)
+                </p>
+              ) : (
+                <p className="text-base font-bold text-amber-700 font-mono">
+                  {formatMoneyDisplay(currency, balanceStr)}
+                </p>
+              )}
             </div>
 
-            <div className="md:col-span-2 border-t border-gray-100 pt-4">
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                Notes
-              </p>
-              <p className="text-sm text-gray-800 whitespace-pre-wrap">
-                {booking.notes || "None"}
-              </p>
-            </div>
-
-            <div className="border-t border-gray-100 pt-4">
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                Created At
-              </p>
-              <p className="text-xs text-gray-600">
-                {formatTimestamp(booking.createdAt, timeZone)}
-              </p>
-            </div>
-
-            <div className="border-t border-gray-100 pt-4">
-              <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">
-                Last Updated
-              </p>
-              <p className="text-xs text-gray-600">
-                {formatTimestamp(booking.updatedAt, timeZone)}
-              </p>
-            </div>
+            {booking.notes && (
+              <div className="border-t border-slate-100 pt-4 col-span-1 md:col-span-2">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                  Notes
+                </p>
+                <p className="text-sm text-slate-700 whitespace-pre-wrap">{booking.notes}</p>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Audit History (PRD FR-62, FR-69) */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-            <h2 className="text-base font-semibold text-gray-900">History of Changes</h2>
-            <p className="text-xs text-gray-500 mt-0.5">
+        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+            <h2 className="font-display text-base font-bold text-[#182230]">History of Changes</h2>
+            <p className="text-xs text-slate-500 mt-0.5">
               Audit trail of date, amount, and status updates (contains no guest personal data).
             </p>
           </div>
           <div className="p-6">
             {booking.events.length === 0 ? (
-              <p className="text-sm text-gray-500">No change history recorded.</p>
+              <p className="text-sm text-slate-500">No change history recorded.</p>
             ) : (
               <div className="flow-root">
                 <ul role="list" className="-mb-8">
@@ -340,7 +313,7 @@ export default async function BookingDetailPage({ params }: BookingPageProps) {
                         <div className="relative pb-8">
                           {!isLast && (
                             <span
-                              className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200"
+                              className="absolute left-4 top-4 -ml-px h-full w-0.5 bg-slate-200"
                               aria-hidden="true"
                             />
                           )}
@@ -349,7 +322,7 @@ export default async function BookingDetailPage({ params }: BookingPageProps) {
                               <span
                                 className={`h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white ${
                                   event.kind === "CREATED"
-                                    ? "bg-blue-100 text-blue-600"
+                                    ? "bg-teal-100 text-[#0F766E]"
                                     : event.kind === "CANCELLED"
                                     ? "bg-amber-100 text-amber-700"
                                     : event.kind === "DELETED"
@@ -362,11 +335,11 @@ export default async function BookingDetailPage({ params }: BookingPageProps) {
                             </div>
                             <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p className="text-sm font-medium text-gray-900">
+                                <p className="text-sm font-medium text-slate-900">
                                   {formatHistoryChange(event, currency)}
                                 </p>
                               </div>
-                              <div className="whitespace-nowrap text-right text-xs text-gray-500">
+                              <div className="whitespace-nowrap text-right text-xs text-slate-400 font-mono">
                                 {formatTimestamp(event.createdAt, timeZone)}
                               </div>
                             </div>

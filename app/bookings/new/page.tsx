@@ -46,7 +46,7 @@ export default async function NewBookingPage({ searchParams }: NewBookingPagePro
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-[#F6F7F9] flex flex-col">
       {/* Top Header */}
       <AppHeader
         companyName={auth.company?.name ?? "My Company"}
@@ -56,24 +56,24 @@ export default async function NewBookingPage({ searchParams }: NewBookingPagePro
         currentTab="new"
       />
 
-      <main className="flex-1 py-10 px-4 sm:px-6 lg:px-8">
+      <main className="flex-1 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">New Booking</h1>
-              <p className="text-sm text-gray-600">
+              <h1 className="font-display text-2xl font-bold text-[#182230]">New Booking</h1>
+              <p className="text-sm text-slate-500">
                 Record a guest stay and verify availability
               </p>
             </div>
             <Link
               href="/"
-              className="text-sm font-medium text-blue-600 hover:text-blue-700"
+              className="text-sm font-semibold text-slate-600 hover:text-slate-900 border border-slate-300 px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 transition-colors"
             >
               Cancel
             </Link>
           </div>
 
-          <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-200">
+          <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200/90">
             <NewBookingForm
               apartments={apartments}
               currency={auth.company?.currency || "NGN"}

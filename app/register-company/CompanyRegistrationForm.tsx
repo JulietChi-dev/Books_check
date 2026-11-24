@@ -43,7 +43,7 @@ export function CompanyRegistrationForm() {
       {state?.error && (
         <div
           role="alert"
-          className="p-4 bg-red-50 border border-red-200 rounded-md text-sm text-red-700 font-medium"
+          className="p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 font-medium"
         >
           {state.error}
         </div>
@@ -60,12 +60,12 @@ export function CompanyRegistrationForm() {
 
       {/* SECTION 1: Company Details */}
       <div className="space-y-4">
-        <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">
+        <h2 className="font-display text-lg font-bold text-[#182230] border-b border-slate-100 pb-2">
           Company Information
         </h2>
 
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="name" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
             Company name <span className="text-red-500">*</span>
           </label>
           <input
@@ -75,7 +75,7 @@ export function CompanyRegistrationForm() {
             required
             minLength={2}
             maxLength={100}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
             placeholder="e.g. Grand View Suites"
           />
           {state?.fieldErrors?.name && (
@@ -85,7 +85,7 @@ export function CompanyRegistrationForm() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div>
-            <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="country" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
               Country <span className="text-red-500">*</span>
             </label>
             <select
@@ -93,7 +93,7 @@ export function CompanyRegistrationForm() {
               name="country"
               defaultValue="NG"
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 bg-white rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
             >
               <option value="NG">Nigeria (NG)</option>
               <option value="GH">Ghana (GH)</option>
@@ -105,7 +105,7 @@ export function CompanyRegistrationForm() {
           </div>
 
           <div>
-            <label htmlFor="currency" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="currency" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
               Currency <span className="text-red-500">*</span>
             </label>
             <select
@@ -113,7 +113,7 @@ export function CompanyRegistrationForm() {
               name="currency"
               defaultValue="NGN"
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 bg-white rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
             >
               <option value="NGN">NGN - Nigerian Naira</option>
               <option value="USD">USD - US Dollar</option>
@@ -125,7 +125,7 @@ export function CompanyRegistrationForm() {
           </div>
 
           <div>
-            <label htmlFor="timeZone" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="timeZone" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
               Time zone <span className="text-red-500">*</span>
             </label>
             <select
@@ -133,7 +133,7 @@ export function CompanyRegistrationForm() {
               name="timeZone"
               defaultValue="Africa/Lagos"
               required
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 bg-white rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
             >
               <option value="Africa/Lagos">Africa/Lagos (UTC+1)</option>
               <option value="Africa/Accra">Africa/Accra (UTC+0)</option>
@@ -147,7 +147,7 @@ export function CompanyRegistrationForm() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="address" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
               Address (optional)
             </label>
             <input
@@ -155,20 +155,20 @@ export function CompanyRegistrationForm() {
               name="address"
               type="text"
               maxLength={200}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
               placeholder="12 Marina Road"
             />
           </div>
 
           <div>
-            <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="city" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
               City (optional)
             </label>
             <input
               id="city"
               name="city"
               type="text"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
               placeholder="Lagos"
             />
           </div>
@@ -176,14 +176,14 @@ export function CompanyRegistrationForm() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="phone" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
               Company phone (optional)
             </label>
             <input
               id="phone"
               name="phone"
               type="tel"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
               placeholder="+234 801 234 5678"
             />
             {state?.fieldErrors?.phone && (
@@ -192,14 +192,14 @@ export function CompanyRegistrationForm() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1">
               Company email (optional)
             </label>
             <input
               id="email"
               name="email"
               type="email"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm text-slate-900"
               placeholder="contact@company.com"
             />
           </div>
@@ -209,11 +209,11 @@ export function CompanyRegistrationForm() {
       {/* SECTION 2: Apartment List */}
       <div className="space-y-4">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">
+          <h2 className="font-display text-lg font-bold text-[#182230] border-b border-slate-100 pb-2">
             Apartments / Rental Units
           </h2>
           {/* Helper text FR-26 */}
-          <p className="mt-1 text-sm text-gray-500 italic">
+          <p className="mt-1 text-xs text-slate-500 italic">
             A hotel registers each rentable room as an apartment.
           </p>
         </div>
@@ -226,10 +226,10 @@ export function CompanyRegistrationForm() {
           {apartments.map((apt, index) => (
             <div
               key={apt.id}
-              className="flex items-center gap-3 bg-gray-50 p-3 rounded-md border border-gray-200"
+              className="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200"
             >
               <div className="flex-1">
-                <label className="block text-xs font-medium text-gray-700">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Apartment / Room name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -239,12 +239,12 @@ export function CompanyRegistrationForm() {
                   value={apt.name}
                   onChange={(e) => updateApartment(apt.id, "name", e.target.value)}
                   placeholder={`e.g. Apartment ${index + 1}`}
-                  className="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full px-3 py-2 border border-slate-300 bg-white rounded-lg shadow-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E]"
                 />
               </div>
 
               <div className="w-28">
-                <label className="block text-xs font-medium text-gray-700">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Rooms (1-20) <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -254,7 +254,7 @@ export function CompanyRegistrationForm() {
                   max={20}
                   value={apt.roomCount}
                   onChange={(e) => updateApartment(apt.id, "roomCount", Number(e.target.value))}
-                  className="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full px-3 py-2 border border-slate-300 bg-white rounded-lg shadow-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E]"
                 />
               </div>
 
@@ -263,7 +263,7 @@ export function CompanyRegistrationForm() {
                   type="button"
                   onClick={() => removeApartment(apt.id)}
                   disabled={apartments.length <= 1}
-                  className="px-2.5 py-1.5 text-xs font-medium text-red-600 hover:text-red-800 disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="px-2.5 py-1.5 text-xs font-semibold text-red-600 hover:text-red-800 disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
                 >
                   Remove
                 </button>
@@ -277,19 +277,19 @@ export function CompanyRegistrationForm() {
             type="button"
             onClick={addApartment}
             disabled={apartments.length >= 50}
-            className="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50"
+            className="inline-flex items-center px-3.5 py-2 border border-slate-300 shadow-xs text-xs font-semibold rounded-xl text-slate-700 bg-white hover:bg-slate-50 disabled:opacity-50 transition-colors cursor-pointer"
           >
             + Add apartment
           </button>
-          <span className="text-xs text-gray-500">{apartments.length} / 50 apartments</span>
+          <span className="text-xs text-slate-400 font-mono">{apartments.length} / 50 apartments</span>
         </div>
       </div>
 
-      <div className="pt-4 border-t border-gray-200">
+      <div className="pt-4 border-t border-slate-100">
         <button
           type="submit"
           disabled={isPending}
-          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+          className="w-full flex justify-center py-3 px-4 rounded-xl shadow-sm shadow-teal-900/15 text-sm font-semibold text-white bg-[#0F766E] hover:bg-[#115E59] active:bg-teal-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0F766E] disabled:opacity-50 transition-all cursor-pointer"
         >
           {isPending ? "Creating company..." : "Register Company & Continue"}
         </button>

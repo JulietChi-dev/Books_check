@@ -168,20 +168,20 @@ export function CalendarShell({
           <button
             type="button"
             onClick={() => router.push(`/?month=${prevSlug}`)}
-            className="px-2.5 py-1 text-xs sm:text-sm border border-gray-300 rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-2.5 py-1 text-xs sm:text-sm border border-slate-300 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600/20"
             aria-label="Previous month"
           >
             ‹ Prev
           </button>
 
-          <h2 className="text-sm sm:text-base font-bold text-gray-900 text-center flex-1 sm:flex-none sm:min-w-[140px]">
+          <h2 className="text-sm sm:text-base font-bold text-slate-900 text-center flex-1 sm:flex-none sm:min-w-[140px] font-display">
             {label}
           </h2>
 
           <button
             type="button"
             onClick={() => router.push(`/?month=${nextSlug}`)}
-            className="px-2.5 py-1 text-xs sm:text-sm border border-gray-300 rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-2.5 py-1 text-xs sm:text-sm border border-slate-300 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600/20"
             aria-label="Next month"
           >
             Next ›
@@ -191,7 +191,7 @@ export function CalendarShell({
             <button
               type="button"
               onClick={() => router.push(`/?month=${todaySlug}`)}
-              className="px-2 py-1 text-xs sm:text-sm border border-blue-300 text-blue-700 rounded bg-blue-50 hover:bg-blue-100"
+              className="px-2.5 py-1 text-xs sm:text-sm border border-teal-200 text-[#0F766E] rounded-lg bg-teal-50 hover:bg-teal-100 font-semibold"
             >
               Today
             </button>
@@ -204,7 +204,7 @@ export function CalendarShell({
 
           {/* Updated timestamp (FR-39) */}
           <span
-            className={`text-[11px] text-gray-400 font-mono hidden md:inline ${refreshing ? "opacity-50" : ""}`}
+            className={`text-[11px] text-slate-400 font-mono hidden md:inline ${refreshing ? "opacity-50" : ""}`}
             aria-live="polite"
             aria-label="Last updated"
           >
@@ -214,7 +214,7 @@ export function CalendarShell({
           {/* New booking button (FR-33) */}
           <Link
             href="/bookings/new"
-            className="inline-flex items-center px-3 py-1.5 text-xs sm:text-sm font-semibold text-white bg-blue-600 rounded hover:bg-blue-700 shadow-xs whitespace-nowrap"
+            className="inline-flex items-center px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white bg-[#0F766E] rounded-lg hover:bg-[#115E59] shadow-sm whitespace-nowrap transition-colors"
           >
             + New booking
           </Link>

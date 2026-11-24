@@ -52,13 +52,13 @@ export function GoToDateForm() {
           setError(false);
         }}
         aria-invalid={error}
-        className={`border rounded px-2 py-1 text-sm h-8 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-          error ? "border-red-500" : "border-gray-300"
+        className={`border rounded-lg px-2 py-1 text-sm h-8 focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-[#0F766E] ${
+          error ? "border-red-500" : "border-slate-300"
         }`}
       />
       <button
         type="submit"
-        className="px-2 py-1 h-8 text-sm border border-gray-300 rounded bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="px-2.5 py-1 h-8 text-sm font-medium border border-slate-300 rounded-lg bg-white hover:bg-slate-50 text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-600/20 transition-colors"
       >
         Go
       </button>

@@ -45,7 +45,7 @@ export default async function SettingsPage() {
   const companyName = company.name;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-[#F6F7F9]">
       {/* Header */}
       <AppHeader
         companyName={companyName}
@@ -56,13 +56,16 @@ export default async function SettingsPage() {
       />
 
       <main className="max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 flex flex-col gap-8">
-        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+        <div>
+          <h1 className="font-display text-2xl font-bold tracking-tight text-[#182230]">Settings</h1>
+          <p className="text-sm text-slate-500 mt-1">Manage your company configuration, apartments, and account credentials.</p>
+        </div>
 
         {/* ── Company Details (FR-80) ───────────────────────────────────────── */}
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-            <h2 className="text-base font-semibold text-gray-900">Company Details</h2>
-            <p className="text-xs text-gray-500 mt-0.5">Edit your company name, location, and contact information.</p>
+        <section className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+            <h2 className="text-base font-semibold text-[#182230]">Company Details</h2>
+            <p className="text-xs text-slate-500 mt-0.5">Edit your company name, location, and contact information.</p>
           </div>
           <div className="p-6">
             <CompanyForm
@@ -82,10 +85,10 @@ export default async function SettingsPage() {
         </section>
 
         {/* ── Apartments (FR-81, FR-82, FR-83) ─────────────────────────────── */}
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-            <h2 className="text-base font-semibold text-gray-900">Apartments</h2>
-            <p className="text-xs text-gray-500 mt-0.5">
+        <section className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+            <h2 className="text-base font-semibold text-[#182230]">Apartments</h2>
+            <p className="text-xs text-slate-500 mt-0.5">
               Rename apartments or change room counts. Remove apartments that have no bookings.
             </p>
           </div>
@@ -106,10 +109,10 @@ export default async function SettingsPage() {
         </section>
 
         {/* ── Change Password (FR-84) ───────────────────────────────────────── */}
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-            <h2 className="text-base font-semibold text-gray-900">Change Password</h2>
-            <p className="text-xs text-gray-500 mt-0.5">Requires your current password. All other sessions will be signed out.</p>
+        <section className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+            <h2 className="text-base font-semibold text-[#182230]">Change Password</h2>
+            <p className="text-xs text-slate-500 mt-0.5">Requires your current password. All other sessions will be signed out.</p>
           </div>
           <div className="p-6">
             <ChangePasswordForm />
@@ -117,10 +120,10 @@ export default async function SettingsPage() {
         </section>
 
         {/* ── Change Login Email (FR-85) ────────────────────────────────────── */}
-        <section className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-            <h2 className="text-base font-semibold text-gray-900">Change Login Email</h2>
-            <p className="text-xs text-gray-500 mt-0.5">A verification link will be sent to the new address. Your old email stays active until verified.</p>
+        <section className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/70">
+            <h2 className="text-base font-semibold text-[#182230]">Change Login Email</h2>
+            <p className="text-xs text-slate-500 mt-0.5">A verification link will be sent to the new address. Your old email stays active until verified.</p>
           </div>
           <div className="p-6">
             <ChangeEmailForm currentEmail={auth.user.email} />

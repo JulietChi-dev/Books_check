@@ -126,14 +126,14 @@ export function NewBookingForm({
       {/* Unusual Dates Confirmation Dialog (FR-46) */}
       {showUnusualModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full shadow-lg space-y-4">
-            <h3 className="text-lg font-bold text-gray-900">Confirm Booking Dates</h3>
-            <p className="text-sm text-gray-600">{unusualPrompt}</p>
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-xl border border-slate-200/90 space-y-4">
+            <h3 className="font-display text-lg font-bold text-[#182230]">Confirm Booking Dates</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">{unusualPrompt}</p>
             <div className="flex justify-end space-x-3 pt-2">
               <button
                 type="button"
                 onClick={() => setShowUnusualModal(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 Cancel
               </button>
@@ -144,7 +144,7 @@ export function NewBookingForm({
                   setConfirmedUnusualDates(true);
                   submitForm(true);
                 }}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700"
+                className="px-4 py-2 bg-[#0F766E] hover:bg-[#115E59] text-white rounded-xl text-sm font-semibold shadow-xs transition-colors"
               >
                 Save anyway
               </button>
@@ -156,20 +156,20 @@ export function NewBookingForm({
       <form onSubmit={handleFormSubmit} className="space-y-6">
         {/* Error Banners */}
         {networkError && (
-          <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded text-sm text-red-700">
+          <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 font-medium">
             {networkError}
           </div>
         )}
 
         {state?.error && !networkError && (
-          <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded text-sm text-red-700">
+          <div role="alert" className="p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700 font-medium">
             {state.error}
           </div>
         )}
 
         {/* Apartment Selection */}
         <div>
-          <label htmlFor="apartmentId" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="apartmentId" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
             Apartment <span className="text-red-500">*</span>
           </label>
           <select
@@ -178,7 +178,7 @@ export function NewBookingForm({
             value={apartmentId}
             onChange={(e) => setApartmentId(e.target.value)}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="block w-full px-3.5 py-2.5 border border-slate-300 bg-white rounded-xl shadow-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
           >
             {apartments.map((apt) => (
               <option key={apt.id} value={apt.id}>
@@ -194,7 +194,7 @@ export function NewBookingForm({
         {/* Guest Name & Phone */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="guestName" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="guestName" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
               Guest name <span className="text-red-500">*</span>
             </label>
             <input
@@ -207,7 +207,7 @@ export function NewBookingForm({
               value={guestName}
               onChange={(e) => setGuestName(e.target.value)}
               placeholder="e.g. Mary Okon"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
             />
             {state?.fieldErrors?.guestName && (
               <p className="mt-1 text-xs text-red-600">{state.fieldErrors.guestName}</p>
@@ -215,7 +215,7 @@ export function NewBookingForm({
           </div>
 
           <div>
-            <label htmlFor="guestPhone" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="guestPhone" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
               Guest phone <span className="text-red-500">*</span>
             </label>
             <input
@@ -226,7 +226,7 @@ export function NewBookingForm({
               value={guestPhone}
               onChange={(e) => setGuestPhone(e.target.value)}
               placeholder="+234 801 234 5678"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
             />
             {state?.fieldErrors?.guestPhone && (
               <p className="mt-1 text-xs text-red-600">{state.fieldErrors.guestPhone}</p>
@@ -237,7 +237,7 @@ export function NewBookingForm({
         {/* Check-In and Check-Out Dates */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <label htmlFor="checkIn" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="checkIn" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
               Check-in date <span className="text-red-500">*</span>
             </label>
             <input
@@ -247,7 +247,7 @@ export function NewBookingForm({
               required
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
             />
             {state?.fieldErrors?.checkIn && (
               <p className="mt-1 text-xs text-red-600">{state.fieldErrors.checkIn}</p>
@@ -255,7 +255,7 @@ export function NewBookingForm({
           </div>
 
           <div>
-            <label htmlFor="checkOut" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="checkOut" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
               Check-out date <span className="text-red-500">*</span>
             </label>
             <input
@@ -265,7 +265,7 @@ export function NewBookingForm({
               required
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
             />
             {state?.fieldErrors?.checkOut && (
               <p className="mt-1 text-xs text-red-600">{state.fieldErrors.checkOut}</p>
@@ -273,11 +273,11 @@ export function NewBookingForm({
           </div>
         </div>
 
-        {/* Money Fields: Total Price, Amount Paid, Live Balance */}
+        {/* Pricing & Payments */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div>
-            <label htmlFor="totalPrice" className="block text-sm font-medium text-gray-700">
-              Total price ({currency}) <span className="text-red-500">*</span>
+            <label htmlFor="totalPrice" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
+              Total stay rate ({currency}) <span className="text-red-500">*</span>
             </label>
             <input
               id="totalPrice"
@@ -286,7 +286,7 @@ export function NewBookingForm({
               required
               value={totalPrice}
               onChange={(e) => setTotalPrice(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
               placeholder="0.00"
             />
             {state?.fieldErrors?.totalPrice && (
@@ -295,8 +295,8 @@ export function NewBookingForm({
           </div>
 
           <div>
-            <label htmlFor="amountPaid" className="block text-sm font-medium text-gray-700">
-              Amount paid ({currency})
+            <label htmlFor="amountPaid" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
+              Amount paid ({currency}) <span className="text-red-500">*</span>
             </label>
             <input
               id="amountPaid"
@@ -305,7 +305,7 @@ export function NewBookingForm({
               required
               value={amountPaid}
               onChange={(e) => setAmountPaid(e.target.value)}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
               placeholder="0.00"
             />
             {state?.fieldErrors?.amountPaid && (
@@ -315,10 +315,10 @@ export function NewBookingForm({
 
           {/* Read-only Live Balance (FR-49) */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
               Balance ({currency})
             </label>
-            <div className="mt-1 px-3 py-2 bg-gray-100 border border-gray-300 rounded-md sm:text-sm font-semibold text-gray-900">
+            <div className="px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl sm:text-sm font-bold font-mono text-slate-900">
               {balance}
             </div>
           </div>
@@ -326,7 +326,7 @@ export function NewBookingForm({
 
         {/* Notes with helper text FR-42 */}
         <div>
-          <label htmlFor="notes" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="notes" className="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-1.5">
             Notes (optional)
           </label>
           <textarea
@@ -336,26 +336,26 @@ export function NewBookingForm({
             maxLength={500}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="block w-full px-3.5 py-2.5 border border-slate-300 rounded-xl shadow-xs placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-600/15 focus:border-[#0F766E] sm:text-sm"
             placeholder="Guest requests, arrival notes..."
           />
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-slate-500">
             Do not enter ID or card numbers.
           </p>
         </div>
 
         {/* Actions */}
-        <div className="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
+        <div className="flex items-center justify-end space-x-3 pt-4 border-t border-slate-100">
           <Link
             href="/"
-            className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="px-4 py-2.5 border border-slate-300 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
           >
             Cancel
           </Link>
           <button
             type="submit"
             disabled={isPending}
-            className="inline-flex justify-center py-2.5 px-6 border border-transparent rounded-md shadow-sm text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="inline-flex justify-center py-2.5 px-6 rounded-xl shadow-sm shadow-teal-900/15 text-sm font-semibold text-white bg-[#0F766E] hover:bg-[#115E59] active:bg-teal-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0F766E] disabled:opacity-50 transition-all cursor-pointer"
           >
             {isPending ? "Saving..." : "Save booking"}
           </button>

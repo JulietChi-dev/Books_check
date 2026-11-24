@@ -17,7 +17,10 @@ import {
 
 function SuccessBanner({ message }: { message: string }) {
   return (
-    <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm rounded-md">
+    <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm rounded-xl font-medium flex items-center gap-2">
+      <svg className="w-4 h-4 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+      </svg>
       {message}
     </div>
   );
@@ -25,7 +28,10 @@ function SuccessBanner({ message }: { message: string }) {
 
 function ErrorBanner({ message }: { message: string }) {
   return (
-    <div role="alert" className="p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-md">
+    <div role="alert" className="p-3.5 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl font-medium flex items-center gap-2">
+      <svg className="w-4 h-4 text-red-600 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+      </svg>
       {message}
     </div>
   );
@@ -37,12 +43,12 @@ function FieldError({ msg }: { msg?: string }) {
 }
 
 const inputClass =
-  "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500";
-const labelClass = "block text-sm font-medium text-gray-700";
+  "mt-1.5 block w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-[#0F766E] transition shadow-xs";
+const labelClass = "block text-sm font-medium text-slate-700";
 const btnPrimary =
-  "px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 transition";
+  "px-5 py-2.5 bg-[#0F766E] hover:bg-[#115E59] active:bg-teal-900 text-white text-sm font-semibold rounded-xl shadow-xs focus:outline-none focus:ring-2 focus:ring-teal-500/20 disabled:opacity-50 transition";
 const btnDanger =
-  "px-3 py-1.5 border border-red-300 bg-red-50 text-red-700 text-sm font-medium rounded-md hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 transition";
+  "px-3.5 py-2 border border-red-200 bg-red-50 text-red-700 text-sm font-medium rounded-xl hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-500/20 disabled:opacity-50 transition";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TIMEZONES & COUNTRIES (abbreviated list for MVP)
@@ -147,14 +153,14 @@ export function CompanyForm({ company, hasBookings }: CompanyFormProps) {
 
         <div>
           <label htmlFor="currency" className={labelClass}>
-            Currency * {hasBookings && <span className="text-xs text-gray-500 font-normal ml-1">(locked — bookings exist)</span>}
+            Currency * {hasBookings && <span className="text-xs text-slate-500 font-normal ml-1">(locked — bookings exist)</span>}
           </label>
           <select
             id="currency"
             name="currency"
             defaultValue={company.currency}
             disabled={hasBookings}
-            className={`${inputClass} ${hasBookings ? "bg-gray-100 text-gray-500" : ""}`}
+            className={`${inputClass} ${hasBookings ? "bg-slate-100 text-slate-500 cursor-not-allowed" : ""}`}
           >
             {CURRENCIES.map((c) => (
               <option key={c.code} value={c.code}>{c.code} — {c.name}</option>
@@ -228,7 +234,7 @@ export function ApartmentRow({ id, name, roomCount, bookingCount }: ApartmentRow
   }
 
   return (
-    <div className="border border-gray-200 rounded-lg p-4 space-y-3 bg-gray-50">
+    <div className="border border-slate-200/90 rounded-xl p-4 space-y-3 bg-slate-50/50">
       {state?.success && <SuccessBanner message="Apartment updated." />}
       {state?.error && !state.success && <ErrorBanner message={state.error} />}
       {deleteState?.error && <ErrorBanner message={deleteState.error} />}
@@ -281,7 +287,7 @@ export function ApartmentRow({ id, name, roomCount, bookingCount }: ApartmentRow
               {deletePending ? "Removing…" : "Remove"}
             </button>
           ) : (
-            <span className="text-xs text-gray-500 ml-1">
+            <span className="text-xs text-slate-500 ml-1">
               {bookingCount} booking{bookingCount !== 1 ? "s" : ""}
             </span>
           )}
@@ -302,7 +308,7 @@ export function AddApartmentForm({ apartmentCount }: { apartmentCount: number })
   );
 
   return (
-    <form action={formAction} className="flex flex-wrap items-end gap-3 pt-2 border-t border-gray-200">
+    <form action={formAction} className="flex flex-wrap items-end gap-3 pt-4 border-t border-slate-200">
       {state?.success && <div className="w-full"><SuccessBanner message="Apartment added." /></div>}
       {state?.error && !state.success && <div className="w-full"><ErrorBanner message={state.error} /></div>}
 
@@ -348,7 +354,7 @@ export function AddApartmentForm({ apartmentCount }: { apartmentCount: number })
       {apartmentCount >= 50 && (
         <p className="w-full text-xs text-amber-700">Maximum of 50 apartments reached.</p>
       )}
-      <p className="w-full text-xs text-gray-500">
+      <p className="w-full text-xs text-slate-500">
         A hotel registers each rentable room as an apartment.
       </p>
     </form>
@@ -379,7 +385,7 @@ export function ChangePasswordForm() {
       <div>
         <label htmlFor="newPassword" className={labelClass}>New password *</label>
         <input id="newPassword" name="newPassword" type="password" required minLength={8} maxLength={128} autoComplete="new-password" className={inputClass} />
-        <p className="mt-1 text-xs text-gray-500">8 to 128 characters.</p>
+        <p className="mt-1 text-xs text-slate-500">8 to 128 characters.</p>
         <FieldError msg={state?.fieldErrors?.newPassword} />
       </div>
 
@@ -414,8 +420,8 @@ export function ChangeEmailForm({ currentEmail }: { currentEmail: string }) {
       {state?.error && !state.success && <ErrorBanner message={state.error} />}
 
       <div>
-        <p className="text-sm text-gray-600">
-          Current login email: <span className="font-medium text-gray-900">{currentEmail}</span>
+        <p className="text-sm text-slate-600">
+          Current login email: <span className="font-semibold text-slate-900">{currentEmail}</span>
         </p>
       </div>
 
@@ -437,4 +443,3 @@ export function ChangeEmailForm({ currentEmail }: { currentEmail: string }) {
     </form>
   );
 }
-

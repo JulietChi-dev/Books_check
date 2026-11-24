@@ -57,7 +57,7 @@ export function CellButton({
       }}
       className={[
         "absolute inset-0 cursor-pointer",
-        "focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-400",
+        "focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500",
       ].join(" ")}
     />
   );

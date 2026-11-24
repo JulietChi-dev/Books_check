@@ -7,7 +7,7 @@
  * 3. Terminal console logging (in development/testing when no credentials are provided)
  */
 
-import nodemailer from "nodemailer";
+import nodemailer, { type Transporter } from "nodemailer";
 
 interface SendEmailParams {
   to: string;
@@ -16,9 +16,9 @@ interface SendEmailParams {
   text?: string;
 }
 
-let smtpTransporter: nodemailer.Transporter | null = null;
+let smtpTransporter: Transporter | null = null;
 
-function getSmtpTransporter(): nodemailer.Transporter | null {
+function getSmtpTransporter(): Transporter | null {
   const host = process.env.SMTP_HOST;
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;

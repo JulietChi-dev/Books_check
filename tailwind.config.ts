@@ -7,7 +7,19 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+      colors: {
+        slateDark: '#182230',
+        alabaster: '#F6F7F9',
+        tealBrand: '#0F766E',
+        tealBrandHover: '#115E59',
+      },
+    },
   },
   plugins: [],
 };

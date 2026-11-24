@@ -227,6 +227,13 @@ export function ApartmentRow({ id, name, roomCount, bookingCount }: ApartmentRow
   const [deleteState, setDeleteState] = useState<SettingsResult | null>(null);
 
   function handleDelete() {
+    if (bookingCount > 0) {
+      setDeleteState({
+        success: false,
+        error: `Cannot remove "${name}" — it has ${bookingCount} booking${bookingCount !== 1 ? "s" : ""}. Cancel and delete all bookings first.`,
+      });
+      return;
+    }
     if (!window.confirm(`Remove apartment "${name}"? This cannot be undone.`)) return;
     startDeleteTransition(async () => {
       const result = await deleteApartmentAction(id);
@@ -279,21 +286,14 @@ export function ApartmentRow({ id, name, roomCount, bookingCount }: ApartmentRow
         </div>
 
         <div className="flex items-center justify-start h-[42px]">
-          {/* FR-83: Delete only when no bookings of any status */}
-          {bookingCount === 0 ? (
-            <button
-              type="button"
-              onClick={handleDelete}
-              disabled={deletePending}
-              className={`${btnDanger} w-full text-center whitespace-nowrap`}
-            >
-              {deletePending ? "Removing…" : "Remove"}
-            </button>
-          ) : (
-            <span className="text-xs text-slate-500 font-medium px-1 whitespace-nowrap">
-              {bookingCount} booking{bookingCount !== 1 ? "s" : ""}
-            </span>
-          )}
+          <button
+            type="button"
+            onClick={handleDelete}
+            disabled={deletePending}
+            className={`${btnDanger} w-full text-center whitespace-nowrap`}
+          >
+            {deletePending ? "Removing…" : "Remove"}
+          </button>
         </div>
       </form>
     </div>

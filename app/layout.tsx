@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { DevErrorHandler } from "@/components/DevErrorHandler";
 
 export const metadata: Metadata = {
   title: "BooksCheck",
@@ -19,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased min-h-screen">{children}</body>
+      <body className="antialiased min-h-screen">
+        <DevErrorHandler />
+        {children}
+      </body>
     </html>
   );
 }

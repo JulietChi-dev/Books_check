@@ -2,9 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { CalendarGrid } from "./CalendarGrid";
-import { Legend } from "./Legend";
 import { EmptyState } from "./EmptyState";
 import { GoToDateForm } from "./GoToDateForm";
 import type { CalendarData } from "@/app/api/calendar/route";
@@ -54,9 +52,10 @@ function nextMonth(year: number, month: number): string {
 
 /**
  * CalendarShell — client component that owns:
- * - Navigation (Prev/Next/Today/Go-to-date/New booking) (FR-33)
+ * - Navigation (Prev/Next/Today/Go-to-date) (FR-33)
  * - 60s auto-refresh while tab is visible + on focus (FR-39)
  * - "Updated HH:MM" timestamp (FR-39, decision: company tz, 24h)
+ * - Inline toolbar legend (Paid / Owes) matching design
  * - Renders CalendarGrid or EmptyState (FR-38)
  */
 export function CalendarShell({
@@ -155,76 +154,75 @@ export function CalendarShell({
       {savedMessage && (
         <div
           role="status"
-          className="bg-green-50 border-b border-green-200 px-4 py-2 text-sm text-green-900 flex items-center justify-between"
+          className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 text-sm text-emerald-900 flex items-center justify-between"
         >
           <span className="font-medium">Booking saved.</span>
         </div>
       )}
 
-      {/* ── Toolbar ── */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-gray-200 bg-white">
-        {/* Navigation row */}
-        <div className="flex items-center justify-between sm:justify-start gap-1.5 sm:gap-2 w-full sm:w-auto">
-          <button
-            type="button"
-            onClick={() => router.push(`/?month=${prevSlug}`)}
-            className="px-2.5 py-1 text-xs sm:text-sm border border-slate-300 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600/20"
-            aria-label="Previous month"
-          >
-            ‹ Prev
-          </button>
-
-          <h2 className="text-sm sm:text-base font-bold text-slate-900 text-center flex-1 sm:flex-none sm:min-w-[140px] font-display">
-            {label}
-          </h2>
-
-          <button
-            type="button"
-            onClick={() => router.push(`/?month=${nextSlug}`)}
-            className="px-2.5 py-1 text-xs sm:text-sm border border-slate-300 rounded-lg bg-white hover:bg-slate-50 text-slate-700 font-medium focus:outline-none focus:ring-2 focus:ring-teal-600/20"
-            aria-label="Next month"
-          >
-            Next ›
-          </button>
+      {/* ── Toolbar & Legend (matching exact design) ── */}
+      <div className="bg-[#F6F7F9] px-4 sm:px-6 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        {/* Navigation, Month label, and status */}
+        <div className="flex items-center flex-wrap gap-2.5 sm:gap-3">
+          <div className="inline-flex items-center bg-white border border-slate-200 rounded-lg p-0.5 text-[12.5px] shadow-xs">
+            <button
+              type="button"
+              onClick={() => router.push(`/?month=${prevSlug}`)}
+              className="px-2.5 py-1 rounded-md hover:bg-slate-100 text-slate-600 font-medium transition cursor-pointer"
+              aria-label="Previous month"
+            >
+              ‹ Prev
+            </button>
+            <span className="px-3 font-display font-bold text-slate-900 min-w-[130px] sm:min-w-[150px] text-center">
+              {label}
+            </span>
+            <button
+              type="button"
+              onClick={() => router.push(`/?month=${nextSlug}`)}
+              className="px-2.5 py-1 rounded-md hover:bg-slate-100 text-slate-600 font-medium transition cursor-pointer"
+              aria-label="Next month"
+            >
+              Next ›
+            </button>
+          </div>
 
           {!isToday && (
             <button
               type="button"
               onClick={() => router.push(`/?month=${todaySlug}`)}
-              className="px-2.5 py-1 text-xs sm:text-sm border border-teal-200 text-[#0F766E] rounded-lg bg-teal-50 hover:bg-teal-100 font-semibold"
+              className="px-2.5 py-1 text-xs border border-teal-200 text-[#0F766E] rounded-lg bg-teal-50 hover:bg-teal-100 font-semibold transition"
             >
               Today
             </button>
           )}
-        </div>
 
-        {/* Action Controls */}
-        <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3 w-full sm:w-auto">
-          <GoToDateForm />
-
-          {/* Updated timestamp (FR-39) */}
           <span
-            className={`text-[11px] text-slate-400 font-mono hidden md:inline ${refreshing ? "opacity-50" : ""}`}
+            className={`text-[11.5px] font-mono text-slate-400 hidden md:inline-block ${refreshing ? "opacity-50" : ""}`}
             aria-live="polite"
             aria-label="Last updated"
           >
             Updated {formatUpdatedTime(updatedAt, timeZone)}
           </span>
 
-          {/* New booking button (FR-33) */}
-          <Link
-            href="/bookings/new"
-            className="inline-flex items-center px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white bg-[#0F766E] rounded-lg hover:bg-[#115E59] shadow-sm whitespace-nowrap transition-colors"
-          >
-            + New booking
-          </Link>
+          <GoToDateForm />
+        </div>
+
+        {/* Legend Pills (inline) */}
+        <div className="flex items-center gap-3 text-[12px]">
+          <span className="text-slate-500 font-medium hidden sm:inline">Legend:</span>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-900 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-[#16A34A] flex-shrink-0" />
+            Paid ✓
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-900 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-[#D97706] flex-shrink-0" />
+            Owes balance
+          </span>
         </div>
       </div>
 
-      {/* ── Legend + Grid ── */}
+      {/* ── Grid ── */}
       <div className="flex-1 p-2 sm:p-4 overflow-hidden flex flex-col w-full max-w-full">
-        <Legend />
-
         {!hasBookings && <EmptyState />}
         <div className="flex-1 overflow-auto w-full max-w-full">
           <CalendarGrid
